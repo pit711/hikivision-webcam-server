@@ -1,0 +1,47 @@
+# ============================================================
+# Systemd Service Unit: Hikvision Thermal Camera Server
+# ============================================================
+#
+# Installation:
+#   sudo cp hikvision-thermal.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now hikvision-thermal
+#
+# Logs ansehen:
+#   journalctl -u hikvision-thermal -f
+#
+# Neustart:
+#   sudo systemctl restart hikvision-thermal
+# ============================================================
+
+[Unit]
+Description=Hikvision Thermal USB Camera Streamer
+# Startet erst wenn das Netzwerk bereit ist (für den HTTP-Server)
+After=network.target
+# Verhindert Endlos-Neustarts: max. 5 Versuche in 60 Sekunden
+StartLimitBurst=5
+StartLimitIntervalSec=60
+
+[Service]
+Type=simple
+User=root
+# Arbeitsverzeichnis für relative Pfade und Log-Dateien
+WorkingDirectory=/root/recordings
+
+# Hauptprozess – Python-Script starten
+ExecStart=/usr/bin/python3 /root/recordings/hikvision_thermal.py
+
+# Bei Absturz automatisch neu starten (nicht bei explizitem stop)
+Restart=on-failure
+RestartSec=5
+
+# Ausgabe ins systemd Journal leiten (abrufbar via journalctl)
+StandardOutput=journal
+StandardError=journal
+
+# CPU-Nutzung begrenzen (ffmpeg + OpenCV können intensiv sein)
+CPUQuota=50%
+
+[Install]
+# Service wird beim normalen Systemstart (multi-user) aktiviert
+WantedBy=multi-user.target
