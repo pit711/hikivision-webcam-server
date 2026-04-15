@@ -779,7 +779,7 @@ HTML_UI = r"""<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HIK Thermal</title>
+<title>Thermal Camera Viewer</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -859,7 +859,7 @@ footer b{color:#9ca3af;}
 <body>
 <header>
   <div class="live-dot"></div>
-  <h1>HIKVISION THERMAL CAMERA</h1>
+  <h1>Thermal Camera Viewer</h1>
   <div class="badge" id="fps-badge">— fps</div>
 </header>
 

@@ -238,7 +238,9 @@ These variables can be adjusted at the top of `hikvision_thermal.py`:
 - In an **unprivileged** LXC container, device permissions cannot be set from inside - must be done from the Proxmox host (`chmod 666 /dev/video0`).
 - The metadata offsets were determined through reverse engineering and are confirmed for `2bdf:0102`. Other Hikvision models may differ.
 
-## License
+## Disclaimer
 
-MIT - free to use, modify, and redistribute.
-Not affiliated with or supported by Hikvision / HIKMicro.
+- This project is not affiliated with, endorsed by, or associated with Hikvision Digital Technology Co., Ltd. or HIKMicro. Hikvision and HIKMicro are registered trademarks of their respective owners.
+- **Security Warning:** This server has no authentication. Never expose it to untrusted networks or the public internet without a reverse proxy with authentication (e.g., nginx + HTTP Basic Auth).
+- **Privacy / GDPR:** Thermal/infrared imaging may capture biometric data subject to GDPR Art. 9 and local surveillance laws. Operators are responsible for compliance with applicable data protection regulations, including obtaining consent where required and providing appropriate signage.
+- **License Note:** This software uses ffmpeg with libx264 (GPL-2.0+). When distributing binaries that link libx264, GPL obligations apply. The MIT license of this project covers only the Python source code.
